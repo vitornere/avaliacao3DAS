@@ -2,6 +2,8 @@ package Cadastros;
 
 public class Viagem {
 
+	public static final int SESSENTA_MINUTOS = 60;
+
 	private int horaInicio;
 	private int minutosInicio;
 	private int horaTermino;
@@ -58,8 +60,11 @@ public class Viagem {
 	}
 
 	public int getDuracaoTotalMinutos() {
-		duracaoTotalMinutos = getDuracaoHoras() * 60 + getDuracaoMinutos();
-		return duracaoTotalMinutos;
+		return getHorasEmMinutos() + getDuracaoMinutos();
+	}
+
+	private int getHorasEmMinutos() {
+		return getDuracaoHoras() * SESSENTA_MINUTOS;
 	}
 
 }

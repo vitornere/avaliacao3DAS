@@ -2,6 +2,8 @@ package Cadastros;
 
 public class DuracaoMinutos {
 
+    public static final int SESSENTA_MINUTOS = 60;
+    public static final int ZERO_MINUTOS = 0;
     private int minutosTermino;
     private int minutosInicio;
 
@@ -11,15 +13,30 @@ public class DuracaoMinutos {
     }
 
     public int computar() {
-        int duracaoMinutos;
-
-        if (minutosTermino > minutosInicio)
-            duracaoMinutos = minutosTermino - minutosInicio;
+        if (isMinTerminoMaiorMinInicio())
+            return calculaMinTerminoMaiorMinInicio();
         else {
-            duracaoMinutos = 60 - minutosInicio + minutosTermino;
-            if (duracaoMinutos == 60) //caso especial
-                duracaoMinutos = 0;
+            return calculaMinTerminoMenorMinInicio();
         }
+    }
+
+    private boolean isMinTerminoMaiorMinInicio() {
+        return minutosTermino > minutosInicio;
+    }
+
+    private int calculaMinTerminoMenorMinInicio() {
+        final int duracaoMinutos = calculaDuracaoMinutosSemCasoEspecial();
+
+        if (duracaoMinutos == SESSENTA_MINUTOS) //caso especial
+            return ZERO_MINUTOS;
+
         return duracaoMinutos;
+    }
+    private int calculaMinTerminoMaiorMinInicio() {
+        return minutosTermino - minutosInicio;
+    }
+
+    private int calculaDuracaoMinutosSemCasoEspecial() {
+        return (SESSENTA_MINUTOS - minutosInicio) + minutosTermino;
     }
 }
